@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## Bloccit: a Reddit replica to teach the fundamentals of web development and Rails.
 
  Made with my mentor at [Bloc](http://bloc.io).
@@ -24,3 +25,6 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+=======
+# bloccit
+>>>>>>> b83e043b681494692fbd0979f161fad302d573d1
