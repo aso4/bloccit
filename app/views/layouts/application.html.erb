@@ -14,7 +14,9 @@
                 <li><%= link_to "Home", welcome_index_path %></li>
                 <li><%= link_to "About", welcome_about_path %></li>
             </ul>
+
             <%= yield %>
+            <button class="social-btn"><%= link_to "Follow me", "https://www.facebook.com/trybloc", class: "social-btn" %></button>
         </div>
     </body>
 </html>
