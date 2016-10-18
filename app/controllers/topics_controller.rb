@@ -5,6 +5,7 @@ class TopicsController < ApplicationController
 
     def show
         @topic = Topic.find(params[:id])
+        #@sponsored_post = SponsoredPost.find(params[:id])
     end
 
     def new
@@ -55,5 +56,5 @@ class TopicsController < ApplicationController
         flash.now[:alert] = "There was an error deleting the topic."
         render :show
       end
-    end    
+    end
 end
