@@ -38,6 +38,9 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'bootstrap-sass'
 
+# Used for encrypting User passwords
+gem 'bcrypt'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
