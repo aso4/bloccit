@@ -3,9 +3,10 @@ class SessionsController < ApplicationController
     end
 
     def create
-        user = User.find_by(email: params[:session][:email].downcase)
+      Rails.logger.info "PARAMS #{session_params.inspect}"
+        user = User.find_by(email: session_params[:login][:email].downcase)
 
-        if user && user.authenticate(params[:session][:password])
+        if user && user.authenticate(session_params[:login][:password])
             create_session(user)
             flash[:notice] = "Welcome, #{user.name}!"
             redirect_to root_path
@@ -19,5 +20,11 @@ class SessionsController < ApplicationController
         destroy_session(current_user)
         flash[:notice] = "You've been signed out, come back soon!"
         redirect_to root_path
+    end
+
+    private
+
+    def session_params
+        params.permit!
     end
 end
