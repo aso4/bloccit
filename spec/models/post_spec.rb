@@ -6,9 +6,9 @@ RSpec.describe Post, type: :model do
   let(:title) { RandomData.random_sentence }
   let(:body) { RandomData.random_paragraph }
 
-  let(:topic) { Topic.create!(name: name, description: description) }
-  let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
-  let(:post) { topic.posts.create!(title: title, body: body, user: user) }
+  let(:topic) { create(:topic) }
+  let(:user) { create(:user) }
+  let(:post) { create(:post) }
 
   it { is_expected.to have_many(:comments) }
   it { is_expected.to have_many(:votes) }
@@ -28,17 +28,17 @@ RSpec.describe Post, type: :model do
 
   describe "attributes" do
     it "has a title, body, and user attribute" do
-      expect(post).to have_attributes(title: title, body: body, user: user)
+      expect(post).to have_attributes(title: post.title, body: post.body)
     end
   end
 
   describe "voting" do
 # #5
     before do
-      3.times { post.votes.create!(value: 1) }
-      2.times { post.votes.create!(value: -1) }
-      @up_votes = post.votes.where(value: 1).count
-      @down_votes = post.votes.where(value: -1).count
+      3.times { post.votes.create!(value: 1, user: user) }
+      2.times { post.votes.create!(value: -1, user: user) }
+      @up_votes = post.votes.where(value: 1, user: user).count
+      @down_votes = post.votes.where(value: -1, user: user).count
     end
 
 # #6
@@ -71,13 +71,13 @@ RSpec.describe Post, type: :model do
 
       it "updates the rank when an up vote is created" do
         old_rank = post.rank
-        post.votes.create!(value: 1)
+        post.votes.create!(value: 1, user: user)
         expect(post.rank).to eq (old_rank + 1)
       end
 
       it "updates the rank when a down vote is created" do
         old_rank = post.rank
-        post.votes.create!(value: -1)
+        post.votes.create!(value: -1, user: user)
         expect(post.rank).to eq (old_rank - 1)
       end
     end
