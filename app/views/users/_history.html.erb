@@ -1,0 +1,9 @@
+<% if @user.posts.count == 0 && @user.comments.count == 0 %>
+  <h2><%= @user.name %> has not submitted any posts yet.</h2>
+<% else %>
+  <h2>Posts</h2>
+  <%= render @user.posts %>
+
+  <h2>Comments</h2>
+  <%= render @user.comments %>
+<% end %>

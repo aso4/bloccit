@@ -1,0 +1,23 @@
+<% if @user.favorites.count == 0 %>
+  <h2><%= @user.name %> has not favorited any posts yet.</h2>
+<% else %>
+  <h2>Favorited Posts</h2>
+  <% @user.favorites.map do |item| %>
+    <div class="media">
+      <div class="pull-left">
+        <%= image_tag current_user.avatar_url(48), class: "gravatar pull-left" %>
+        <%= render partial: 'votes/voter', locals: { post: item.post } %>
+        <div class="media-body">
+          <h4 class="media-heading">
+            <%= link_to item.post.title, topic_post_path(item.post.topic, item.post) %>
+          </h4>
+          <small>
+            submitted <%= time_ago_in_words(item.post.created_at) %> ago by <%= item.post.user.name %> <br>
+            <%= item.post.comments.count %> Comments
+          </small>
+        </div>
+
+      </div>
+    </div>
+  <% end %>
+<% end %>

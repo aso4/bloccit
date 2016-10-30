@@ -19,8 +19,6 @@
   </div>
 </div>
 
-<h2>Posts</h2>
-<%= render @user.posts %>
+<%= render partial: 'users/history', locals: { user: @user } %>
 
-<h2>Comments</h2>
-<%= render @user.comments %>
+<%= render partial: 'users/favorites', locals: { user: @user } %>
